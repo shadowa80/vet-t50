@@ -227,7 +227,7 @@ class VetT50(MartInfo):
 		self._SESSION.headers.update({'Content-Type':"application/x-www-form-urlencoded"})
 		#
 		config = configparser.ConfigParser()
-		config.read('VetT50.ini')
+		config.read('../VetT50.ini')
 		self._USER_AGENT = config['vet-t50.mart-info.ru'].get('user_agent')
 		self.client_id = config['vet-t50.mart-info.ru'].get('client_id')
 		self.client_secret = config['vet-t50.mart-info.ru'].get('client_secret')
