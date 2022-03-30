@@ -214,6 +214,7 @@ class VetT50(MartInfo):
 		'animal_get':		'/api/v2/animal/get',				# (GET) 
 		'animal_delete':	'/api/v2/animal/delete',			# (DELETE) 
 	}
+
 	_SESSION = requests.Session()
 	_USER_AGENT = None
 	client_id=		''
@@ -465,6 +466,16 @@ class VetT50(MartInfo):
 		result = self._getPages(url, **params)
 		return result
 
+	def getAnimal(self, **params):
+		'''
+		Получаем данные о животных
+		Parameters
+		'''
+		url = self.getURL('animal')
+		logger.debug('getAnimal: %s' % url)
+		result = self._getPages(url, **params)
+		return result
+
 	def getVaccination(self):
 		'''
 		Проверяем статус обработки вакцины. GET с ID в запросе
@@ -476,6 +487,8 @@ class VetT50(MartInfo):
 		logger.debug('getVaccination: %s' % url)
 		result = self._getPages(url, **params)
 		return result
+
+	
 
 	def addVaccination(self, data):
 		'''
@@ -512,6 +525,8 @@ if __name__ == '__main__':
 	breed = vet.getBreeds(breed_name="Шотландская прямоухая", kind_id=kind[0]['id'])
 	colour = vet.getColour(name="Серый", full_match=True)
 	colour = vet.getColour(name="Серый")
+	animal = vet.getAnimal()
+	print ("A:", animal)
 	vactinations = vet.getVaccineSeries(vaccine_name='Nobivac Rabies', serial_number="A551A02")
 	print ("K:", kind)
 	print ("B:", breed)
